@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           ls -la
-          pip install selenium facebook-sdk requests python-dotenv
+          pip install -r requirements.txt
 
       - name: Run bot
         run: python facebook_book_poster.py
