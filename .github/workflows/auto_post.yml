@@ -1,8 +1,6 @@
 name: Auto Book Post (สรุปหนังสือ)
 
 on:
-  schedule:
-    - cron: "0 17 * * *"   # 00:00 ไทยเวลา (GitHub ใช้ UTC)
   workflow_dispatch:
 
 jobs:
@@ -21,29 +19,19 @@ jobs:
         sleep 5
 
     - name: Pull Qwen model
-      run: |
-        ollama pull qwen2.5:7b-instruct
+      run: ollama pull qwen2.5:7b-instruct
 
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.10"
 
+    - name: Check files
+      run: ls -al
+
     - name: Install dependencies
       run: pip install -r requirements.txt
 
     - name: Run bot
-      env:
-        FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
-        FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
-        TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
       run: python facebook_book_poster.py
 
-    - name: Commit log
-      run: |
-        git config --global user.email "bot@example.com"
-        git config --global user.name "AutoBot"
-        git add posted_books.json
-        git commit -m "update log" || true
-        git push
