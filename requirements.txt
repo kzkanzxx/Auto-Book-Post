@@ -1,5 +1,4 @@
-requests
-qwen-vl-utils
-pillow
-python-dotenv
+selenium
 facebook-sdk
+requests
+python-dotenv
