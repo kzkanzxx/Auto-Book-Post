@@ -1,3 +1,5 @@
 requests
-feedparser
-python-dateutil
+qwen-vl-utils
+pillow
+python-dotenv
+facebook-sdk
